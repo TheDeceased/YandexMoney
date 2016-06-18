@@ -4,7 +4,7 @@ namespace TheDeceased\YandexMoney;
 
 class Hasher implements IHasher
 {
-	protected $hashFields = [
+	protected $hashFields = array(
 		'action',
 		'orderSumAmount',
 		'orderSumCurrencyPaycash',
@@ -13,11 +13,11 @@ class Hasher implements IHasher
 		'invoiceId',
 		'customerNumber',
 		'token',
-	];
+	);
 
 	public function hash(array $parameters)
 	{
-		$values = [];
+		$values = array();
 		foreach ($this->hashFields as $field) {
 			$values[] = (string)$parameters[$field];
 		}

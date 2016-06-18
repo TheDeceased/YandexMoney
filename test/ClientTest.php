@@ -43,7 +43,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
 	public function testCheckResponseCallProcessor()
 	{
 		$processor = $this->getMockBuilder('\TheDeceased\YandexMoney\IProcessor')
-			->setMethods(['paymentChecked', 'paymentAviso'])
+			->setMethods(array('paymentChecked', 'paymentAviso'))
 			->getMock();
 		$processor->expects($this->once())->method('paymentChecked');
 		$client = new Client(1, 'asd', new Hasher(), $processor);
@@ -56,18 +56,18 @@ class ClientTest extends \PHPUnit_Framework_TestCase
 		$hasher = new Hasher();
 		$token = 'asd';
 		$client = new Client(1, $token, $hasher);
-		$response = $client->checkOrder(array_merge($this->mockData, [
-			'md5' => $hasher->hash(array_merge($this->mockData, [
+		$response = $client->checkOrder(array_merge($this->mockData, array(
+			'md5' => $hasher->hash(array_merge($this->mockData, array(
 				'token' => $token,
-			]))
-		]));
+			)))
+		)));
 		$this->assertEquals(0, $response->getStatus());
 	}
 
 	public function testAvisoResponseCallProcessor()
 	{
 		$processor = $this->getMockBuilder('\TheDeceased\YandexMoney\IProcessor')
-			->setMethods(['paymentChecked', 'paymentAviso'])
+			->setMethods(array('paymentChecked', 'paymentAviso'))
 			->getMock();
 		$processor->expects($this->once())->method('paymentAviso');
 		$client = new Client(1, 'asd', new Hasher(), $processor);
